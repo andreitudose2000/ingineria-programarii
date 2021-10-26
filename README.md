@@ -84,3 +84,33 @@ Scaunul smart SPAtaREST revoluționează modul în care stai la birou, crearea l
 -desktop software (driver) pentru date biometrice
 
 -să se lase pe spate automat
+
+ ### Cerințe care țin de sănătate, securitate, modificări fizice ale scaunului
+
+* când utilizatorul se ridică de pe scaun să  dea pc-ul lock/când se pune pe scaun să apară login
+
+* fingerprint sensor (integrare cu windows hello?)
+
+* spătarul să se ajusteze automat în funcție de poziția utilizatorului (senzor de presiune)
+
+* scaunul să regleze automat înălțimea în funcție de date biometrice introduse de utilizator
+
+* input: înălțime utilizator, înălțime nivel birou (tastatură și mouse), înălțime nivel monitor
+
+* ajustare automată hand rests
+
+### Cerințe care țin de software, quality of life, control din driver
+
+* desktop software (driver) pentru date biometrice
+
+* încălzire în scaun (în funcție de temperatura din cameră)
+
+* să comunice prin mqtt cu un smart thermostat
+
+* să îți țină băutură caldă
+
+* să se lase pe spate automat
+
+* boxe integrate în scaun care să te salute
+
+* să-ți zică să te mai ridici când stai prea mult
