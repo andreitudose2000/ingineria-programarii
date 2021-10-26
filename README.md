@@ -57,3 +57,30 @@ Scaunul smart SPAtaREST revoluționează modul în care stai la birou, crearea l
 
 11. să-ți zică să te mai ridici când stai prea mult
 
+## Interpretarea și prioritizarea cerințelor
+
+### Cerințe funcționale : 
+
+-când utilizatorul se ridică de pe scaun să se dea pc-ul lock/când se pune pe scaun să apară login
+
+-spătarul să se ajusteze automat în funcție de postura utilizatorului (senzor de presiune)
+
+-scaunul să regleze automat înălțimea în funcție de date biometrice introduse de utilizator
+
+-încălzire în scaun (în funcție de temperatura din cameră)
+
+-să îți țină băutura caldă
+
+-boxe integrate în scaun care să te salute
+
+-să-ți zică să te mai ridici când stai prea mult
+
+### Cerințe nonfunctionale:
+
+-fingerprint sensor (integrare cu windows hello?)
+
+-ajustare automată hand rests
+
+-desktop software (driver) pentru date biometrice
+
+-să se lase pe spate automat
