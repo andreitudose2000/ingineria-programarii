@@ -114,3 +114,5 @@ Scaunul smart SPAtaREST revoluționează modul în care stai la birou, crearea l
 * boxe integrate în scaun care să te salute
 
 * să-ți zică să te mai ridici când stai prea mult
+
+![Plotarea POKERSCRUM](https://github.com/andreitudose2000/ingineria-programarii/blob/main/Poker.png)
