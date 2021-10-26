@@ -16,7 +16,7 @@ Scaunul smart SPAtaREST revoluționează modul în care stai la birou, crearea l
 * software ușor de folosit care fluidizează procesele fizice ale scaunului
 
 ## Grupul țintă
-* Ca angajat carelucrează cu date confidențiale, mi-ar plăcea ca atunci când mă ridic de pe scaun, computerul la care lucrez să fie securizat automat, fără să fie nevoie să securizez eu manual fișierele. 
+* Ca angajat care lucrează cu date confidențiale, mi-ar plăcea ca atunci când mă ridic de pe scaun, computerul la care lucrez să fie securizat automat, fără să fie nevoie să securizez eu manual fișierele. 
 
 * Ca gamer, îmi doresc ca scaunul meu să îmi permită să stau ore în șir așezat fără să mă doară spatele și fără să fie nevoie să îl ajustez eu în permanentă. 
 
@@ -27,3 +27,33 @@ Scaunul smart SPAtaREST revoluționează modul în care stai la birou, crearea l
 * Ca angajat într-o corporație, îmi doresc să am un scaun care să nu mă facă să transpir vara și să îngheț iarnă.
 
 * Ca pensionar cu hernie de disc, îmi doresc un scaun care să îmi susțînă bine coloana pentru a nu agrava boală, care să aibă încălzire pentru că de la o vârstă e nevoie și care să îmi amintească periodic să mă ridic și să mă plimb, pentru că mă pot pierde în integrame. Dacă poate și să îmi țină ceaiul cald, e ideal. 
+
+
+## Colectarea cerințelor
+
+1. când utilizatorul se ridică de pe scaun să se dea pc-ul lock/când se pune pe scaun să apară login
+
+2. fingerprint sensor (integrare cu windows hello?)
+
+3. spătarul să se ajusteze automat în funcție de postura utilizatorului (senzor de presiune)
+
+4. scaunul să regleze automat înălțimea în funcție de date biometrice introduse de utilizator
+
+    input: înălțime utilizator, înălțime nivel birou (tastatură și mouse), înălțime nivel monitor
+
+5. ajustare automată hand rests
+
+6. desktop software (driver) pentru date biometrice
+
+7. încălzire în scaun (în funcție de temperatura din camera)
+
+    note: să comunice prin mqtt cu un smart thermostat
+
+8. să îți țină băutura caldă
+
+9. să se lase pe spate automat
+
+10. boxe integrate în scaun care să te salute
+
+11. să-ți zică să te mai ridici când stai prea mult
+
