@@ -5,8 +5,7 @@
    - [ ] când utilizatorul se ridică de pe scaun să se dea pc-ul lock/când se pune pe scaun să apară login
    - [ ] fingerprint sensor (integrare cu windows hello?)
    - [ ] spătarul să se ajusteze automat în funcție de postura utilizatorului (senzor de presiune)
-   - [ ] scaunul să regleze automat înălțimea în funcție de date biometrice introduse de utilizator
-   - [ ] input: înălțime utilizator, înălțime nivel birou (tastatură și mouse), înălțime nivel monitor
+   - [ ] scaunul să regleze automat înălțimea în funcție de date biometrice introduse de utilizator (input: înălțime utilizator, înălțime nivel birou (tastatură și mouse), înălțime nivel monitor)
    - [ ] ajustare automată hand rests
    - [ ] desktop software (driver) pentru date biometrice
    - [ ] încălzire în scaun (în funcție de temperatura din camera) (note: să comunice prin mqtt cu un smart thermostat)
