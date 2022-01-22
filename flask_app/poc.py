@@ -56,7 +56,7 @@ def getFromDb():
     id = request.args['id']
     db = get_db()
     entry = db.execute(
-            'SELECT id, some_text, another_text FROM test WHERE id = ?', (id)
+            'SELECT * FROM test WHERE id = ?', (id) # id, some_text, another_text
         ).fetchone()
     return jsonify(no_problem = entry['some_text']), 200
 
