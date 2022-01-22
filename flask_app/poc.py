@@ -70,9 +70,3 @@ def getFromDb2():
     for x in entrys:
         res.append({'id' : x['id'], 'some_text' : x['some_text'], 'another_text' : x['another_text']})
     return jsonify(res), 200
-
-
-
-
-
-
