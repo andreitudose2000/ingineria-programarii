@@ -6,11 +6,12 @@
    - [ ] să-ți zică să te mai ridici când stai prea mult
    - [ ] încălzire în scaun (în funcție de temperatura din camera) (note: să comunice prin mqtt cu un smart thermostat)
    - [ ] desktop software (driver) pentru date biometrice
+   - [ ] senzorul de pe sezut sa iti masoare greutatea si sa o afiseze in aplicatia desktop
    - [ ] scaunul să regleze automat înălțimea în funcție de date biometrice introduse de utilizator (input: înălțime utilizator, înălțime nivel birou (tastatură și mouse), înălțime nivel monitor)
    - [ ] fingerprint sensor (integrare cu windows hello?)
    - [ ] spătarul să se ajusteze automat în funcție de postura utilizatorului (senzor de presiune)
    - [ ] ajustare automată hand rests
-   - [ ] să îți țină băutura caldă
+   - [ ] să îți țină băutura caldă - senzor de temperatură in cupholder si 
    - [ ] să se lase pe spate automat
    - [ ] boxe integrate în scaun care să te salute
  - [ ] Tot proiectul intr-un repo
