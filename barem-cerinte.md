@@ -2,7 +2,7 @@
  - [ ] REST API - documentat cu OpenAPI / Swagger
  - [ ] MQTT API - documentat cu AsyncAPI
  - [ ] Minim 5 functionalitati
-   - [ ] când utilizatorul se ridică de pe scaun să se dea pc-ul lock/când se pune pe scaun să apară login
+   - [ ] când utilizatorul se ridică de pe scaun să se dea pc-ul lock
    - [ ] să-ți zică să te mai ridici când stai prea mult
    - [ ] încălzire în scaun (în funcție de temperatura din camera) (note: să comunice prin mqtt cu un smart thermostat)
    - [ ] desktop software (driver) pentru date biometrice
