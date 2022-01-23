@@ -29,12 +29,19 @@ def add_mqtt(app):
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
     mqtt.subscribe('home/1')
+    mqtt.subscribe('incalzire')
+    mqtt.subscribe('temperature')
 
 # print the message, later more logic
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
     print(message.topic)
     print(message.payload.decode())
+
+    if(message.topic == 'temperature'):
+        from . import heat
+        heat.new_temp(int(message.payload.decode()))
+
 
 # app factory
 def create_app(test_config=None):
@@ -81,5 +88,10 @@ def create_app(test_config=None):
     from . import poc_mqtt
     app.register_blueprint(poc_mqtt.bp)
     poc_mqtt.mqtt = mqtt
+
+    from . import heat
+    app.register_blueprint(heat.bp)
+    heat.mqtt = mqtt
+    heat.app = app
 
     return app
