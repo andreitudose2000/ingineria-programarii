@@ -1,0 +1,21 @@
+asyncapi: 2.2.0
+info:
+  title: SPAtaREST MQTT
+  version: '1.0'
+servers:
+  production:
+    url: tcp://localhost:1883
+    description: Mosquitto Server
+    protocol: mqtt
+    protocolVersion: '5.0'
+    x-keep-alive: 60
+channels:
+  scaun/user_asezat:
+    description: Topic pe care se trimit evenimentele "Userul s-a asezat pe/ridicat de pe scaun"
+    publish:
+      summary: Trimite mesaje
+      message:
+        payload:
+          type: integer
+    subscribe:
+      summary: Primeste mesaje
