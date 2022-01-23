@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS test;
+DROP TABLE IF EXISTS heat;
 DROP TABLE IF EXISTS user_info;
 
 CREATE TABLE test (
@@ -6,6 +7,16 @@ CREATE TABLE test (
   some_text TEXT UNIQUE NOT NULL,
   another_text TEXT NOT NULL,
   a_date DATETIME
+);
+
+CREATE TABLE heat (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  headrest INTEGER NOT NULL,
+  backrest INTEGER NOT NULL,
+  armrest INTEGER NOT NULL,
+  bumrest INTEGER NOT NULL,
+  moment DATETIME
+);
 );
 
 CREATE TABLE user_info (
