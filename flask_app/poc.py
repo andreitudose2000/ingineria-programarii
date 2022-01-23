@@ -2,6 +2,7 @@ from array import array
 from datetime import datetime
 from flask import (Blueprint, g, request, jsonify)
 from flask_app.db import get_db
+import sys
 
 bp = Blueprint('poc', __name__, url_prefix='/poc')
 
