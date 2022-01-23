@@ -39,7 +39,7 @@ def add_temps():
     return jsonify(probleme = "ok"), 200
 
 def adjust_temp(temp, headrest, backrest, armrest, bumrest):
-    mqtt.publish("incalzire", f'sezut: {bumrest >= temp}; spatar: {backrest >= temp}; headrest: {headrest >= temp}; armrest: {armrest >= temp}')
+    mqtt.publish("scaun/incalzire", f'sezut: {bumrest >= temp}; spatar: {backrest >= temp}; headrest: {headrest >= temp}; armrest: {armrest >= temp}')
 
 def new_temp(temper):
     with app.app_context():

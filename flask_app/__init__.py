@@ -40,8 +40,8 @@ def handle_connect(client, userdata, flags, rc):
     publisher_sensor_scaun.mqtt = mqtt
     publisher_sensor_scaun.on_connect()
 
-    mqtt.subscribe('incalzire')
-    mqtt.subscribe('temperature')
+    mqtt.subscribe('scaun/incalzire')
+    mqtt.subscribe('camera/temperatura')
 
 
 # print the message, later more logic
@@ -49,7 +49,7 @@ def handle_connect(client, userdata, flags, rc):
 def handle_mqtt_message(client, userdata, message):
     print(f"Topic: {message.topic} Mesaj: {message.payload.decode()} ")
 
-    if message.topic == 'temperature':
+    if message.topic == 'camera/temperatura':
         from . import heat
         heat.new_temp(int(message.payload.decode()))
 
