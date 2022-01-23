@@ -33,7 +33,7 @@ def add_temps():
     except db.IntegrityError:
         return jsonify(probleme = "i dunno"), 500
     
-    if(temp is not None):
+    if temp is not None:
         adjust_temp(temp, request.json['headrest'], request.json['backrest'], request.json['armrest'], request.json['bumrest'])
 
     return jsonify(probleme = "ok"), 200

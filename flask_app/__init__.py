@@ -33,6 +33,8 @@ def add_mqtt(app):
 
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
+    mqtt.subscribe("home/1")
+
     mqtt.subscribe("scaun/user_asezat")
     from mqtt import publisher_sensor_scaun
     publisher_sensor_scaun.mqtt = mqtt
