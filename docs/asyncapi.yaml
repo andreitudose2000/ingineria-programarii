@@ -1,21 +1,65 @@
+# https://playground.asyncapi.io/
+
 asyncapi: 2.2.0
+
 info:
   title: SPAtaREST MQTT
-  version: '1.0'
+  version: "1.0"
+
 servers:
-  production:
+  development:
     url: tcp://localhost:1883
     description: Mosquitto Server
     protocol: mqtt
-    protocolVersion: '5.0'
-    x-keep-alive: 60
+
 channels:
   scaun/user_asezat:
-    description: Topic pe care se trimit evenimentele "Userul s-a asezat pe/ridicat de pe scaun"
+    description: Evenimentele de ridicat / asezat pe scaun
     publish:
-      summary: Trimite mesaje
       message:
-        payload:
-          type: integer
+        $ref: "#/components/messages/asezat_pe_scaun"
     subscribe:
-      summary: Primeste mesaje
+      message:
+        $ref: "#/components/messages/asezat_pe_scaun"
+  scaun/incalzire:
+    description: Comenzile de incalzire a scaunului
+    publish:
+      message:
+        $ref: "#/components/messages/incalzire"
+    subscribe:
+      message:
+        $ref: "#/components/messages/incalzire"
+
+
+components:
+  messages:
+    asezat_pe_scaun:
+      name: asezat_pe_scaun
+      description: True daca utilizatorul este asezat pe scaun si False daca nu
+      payload:
+        type: boolean
+        examples:
+          - "True"
+          - "False"
+
+
+
+    incalzire:
+      name: incalzire
+      description: Indicatii pentru incalzirea pe fiecare piesa componenta a scaunului
+      payload:
+        type: object
+        properties:
+          sezut:
+            type: boolean
+          spatar:
+            type: boolean
+          headrest:
+            type: boolean
+          armrest:
+            type: boolean
+        examples:
+          - sezut: true
+            spatar: true
+            headrest: false
+            armrest: false

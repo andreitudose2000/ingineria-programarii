@@ -21,4 +21,4 @@ def chair_sensor_thread():
         chance = random.randint(1, 100)
         if chance <= 1:
             asezat = not asezat
-            mqtt.publish("scaun/user_asezat", str(asezat))
+            mqtt.publish("scaun/user_asezat", asezat)
