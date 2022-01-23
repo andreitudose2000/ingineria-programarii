@@ -6,3 +6,11 @@ CREATE TABLE test (
   another_text TEXT NOT NULL,
   a_date DATETIME
 );
+
+CREATE TABLE user_info (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_height NUMERIC NOT NULL,
+  chair_height NUMERIC NOT NULL,
+  table_height NUMERIC NOT NULL,
+  updated_on DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
