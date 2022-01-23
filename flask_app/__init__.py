@@ -5,9 +5,6 @@ from flask import Flask, jsonify
 from flask_mqtt import Mqtt
 
 # error functions
-from paho.mqtt.client import Client
-
-
 def page_not_found(e):
         return jsonify(error=str(e)), 404
 
