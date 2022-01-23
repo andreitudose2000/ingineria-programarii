@@ -38,11 +38,18 @@ def handle_connect(client, userdata, flags, rc):
     publisher_sensor_scaun.mqtt = mqtt
     publisher_sensor_scaun.on_connect()
 
+    mqtt.subscribe('incalzire')
+    mqtt.subscribe('temperature')
+
 
 # print the message, later more logic
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
     print(f"Topic: {message.topic} Mesaj: {message.payload.decode()} ")
+
+    if message.topic == 'temperature':
+        from . import heat
+        heat.new_temp(int(message.payload.decode()))
 
 # app factory
 def create_app(test_config=None, db_file=None):
@@ -94,5 +101,9 @@ def create_app(test_config=None, db_file=None):
     app.register_blueprint(poc_mqtt.bp)
     poc_mqtt.mqtt = mqtt
 
-    return app
+    from . import heat
+    app.register_blueprint(heat.bp)
+    heat.mqtt = mqtt
+    heat.app = app
 
+    return app
