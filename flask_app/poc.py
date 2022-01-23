@@ -59,6 +59,8 @@ def getFromDb():
     entry = db.execute(
             'SELECT id, some_text, another_text FROM test WHERE id = ?', (id)
         ).fetchone()
+    if entry is None:
+        return jsonify({}), 404
     return jsonify(no_problem = entry['some_text']), 200
 
 @bp.route('/get-all-from-db', methods=(['GET']))

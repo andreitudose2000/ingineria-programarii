@@ -37,7 +37,15 @@ def test_poc_addToDb(tester):
     assert "no_problem" in json.loads(response.data)
 
 
-def test_get_from_db(tester):
+def test_poc_get_from_db(tester):
+    _, postData = addToDb(tester)
+    response = tester.get("/poc/get-from-db?id=2")
+    assert response.status_code == 404
+    response = tester.get("/poc/get-from-db?id=1")
+    data = json.loads(response.data)
+    assert data["no_problem"] == "test - some text"
+
+def test_poc_get_all_from_db(tester):
     _, postData = addToDb(tester)
     response = tester.get("/poc/get-all-from-db")
     data = json.loads(response.data)
