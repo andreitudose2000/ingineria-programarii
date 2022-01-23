@@ -2,6 +2,7 @@ from array import array
 from datetime import datetime
 from flask import (Blueprint, g, request, jsonify)
 from flask_app.db import get_db
+import sys
 
 bp = Blueprint('poc', __name__, url_prefix='/poc')
 
@@ -58,6 +59,8 @@ def getFromDb():
     entry = db.execute(
             'SELECT * FROM test WHERE id = ?', (id) # id, some_text, another_text
         ).fetchone()
+    if entry is None:
+        return jsonify({}), 404
     return jsonify(no_problem = entry['some_text']), 200
 
 @bp.route('/get-all-from-db', methods=(['GET']))
