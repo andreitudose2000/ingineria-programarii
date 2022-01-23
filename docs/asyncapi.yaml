@@ -21,6 +21,7 @@ channels:
     subscribe:
       message:
         $ref: "#/components/messages/asezat_pe_scaun"
+        
   scaun/incalzire:
     description: Comenzile de incalzire a scaunului
     publish:
@@ -29,8 +30,16 @@ channels:
     subscribe:
       message:
         $ref: "#/components/messages/incalzire"
-
-
+        
+  camera/temperatura:
+    description: Temperatura camerei in timp real
+    publish:
+      message:
+        $ref: "#/components/messages/temperatura"
+    subscribe:
+      message:
+        $ref: "#/components/messages/temperatura"
+      
 components:
   messages:
     asezat_pe_scaun:
@@ -41,8 +50,6 @@ components:
         examples:
           - "True"
           - "False"
-
-
 
     incalzire:
       name: incalzire
@@ -63,3 +70,13 @@ components:
             spatar: true
             headrest: false
             armrest: false
+            
+    temperatura:
+      name: temperatura
+      description: Valoarea temperaturii din camera in grade Celsius
+      payload:
+        type: integer
+        examples:
+          - 14
+          - 20
+          - 32
