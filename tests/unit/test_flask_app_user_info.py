@@ -27,7 +27,7 @@ def addOneUserInfoRow(tester):
     postData = {
         "user_height": 180
     }
-    response = tester.post("/userInfo/", json=postData)
+    response = tester.post("/userInfo/", json=postData, follow_redirects=True)
     return response, postData
 
 
@@ -37,29 +37,29 @@ def test_user_info_post_201(tester):
 
 
 def test_user_info_post_400_no_body(tester):
-    response = tester.post("/userInfo/", json={})
+    response = tester.post("/userInfo/", json={}, follow_redirects=True)
     assert response.status_code == 400
 
 
 def test_user_info_post_400_no_user_height(tester):
     response = tester.post("/userInfo/", json={
         "other_data": 100
-    })
+    }, follow_redirects=True)
     assert response.status_code == 400
 
 
 def test_user_info_post_400_bad_user_height(tester):
     response = tester.post("/userInfo/", json={
         "user_height": 90
-    })
+    }, follow_redirects=True)
     assert response.status_code == 400
     response = tester.post("/userInfo/", json={
         "user_height": 260
-    })
+    }, follow_redirects=True)
     assert response.status_code == 400
     response = tester.post("/userInfo/", json={
         "user_height": "wrong"
-    })
+    }, follow_redirects=True)
     assert response.status_code == 400
 
 
