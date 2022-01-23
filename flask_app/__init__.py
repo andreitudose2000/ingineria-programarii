@@ -36,8 +36,7 @@ def handle_connect(client, userdata, flags, rc):
 # print the message, later more logic
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
-    print(message.topic)
-    print(message.payload.decode())
+    print(f"Topic: {message.topic} Mesaj: {message.payload.decode()} ")
 
 # app factory
 def create_app(test_config=None, db_file=None):
@@ -81,5 +80,12 @@ def create_app(test_config=None, db_file=None):
     # Adding blueprints/controllers
     from . import poc
     app.register_blueprint(poc.bp)
+
+    from . import user_info
+    app.register_blueprint(user_info.bp)
+
+    from . import poc_mqtt
+    app.register_blueprint(poc_mqtt.bp)
+    poc_mqtt.mqtt = mqtt
 
     return app
