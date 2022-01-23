@@ -8,7 +8,7 @@ bp = Blueprint('userInfo', __name__, url_prefix='/userInfo')
 @bp.route('/', methods=(['GET']))
 def getUserInfo():
     userInfo = get_db().execute(
-        'SELECT id, user_height, chair_height, table_height, updated_on \
+        'SELECT id, user_height, chair_height, desk_height, updated_on \
         FROM user_info \
         ORDER BY updated_on DESC'
     ).fetchone()
@@ -20,14 +20,12 @@ def getUserInfo():
         "id": userInfo["id"],
         "user_height": userInfo["user_height"],
         "chair_height": userInfo["chair_height"],
-        "table_height": userInfo["table_height"],
+        "desk_height": userInfo["desk_height"],
         "updated_on": userInfo["updated_on"]
     }), 200
 
 @bp.route('/', methods=(['POST']))
 def setUserInfo():
-    print(request.json)
-    print(type(request.json))
     if not request.json:
         return jsonify(message="Nu ati trimis setari"), 400
     if 'user_height' not in request.json:
@@ -44,7 +42,7 @@ def setUserInfo():
 
     db = get_db()
     try:
-        db.execute("INSERT INTO user_info (user_height, chair_height, table_height) VALUES (?, ?, ?)",
+        db.execute("INSERT INTO user_info (user_height, chair_height, desk_height) VALUES (?, ?, ?)",
                    (user_height, utils.chair_height_formula(user_height), utils.desk_height_formula(user_height)))
         db.commit()
     except db.Error:
