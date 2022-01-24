@@ -11,18 +11,18 @@ temp = None
 mqtt = None
 app = None
 
-@bp.route('/set', methods=(['POST']))
+@bp.route('/', methods=(['POST']))
 def add_temps():
     if not request.json:
-        return jsonify(probleme = "Lipseste body"), 400
+        return jsonify(message = "Lipseste body"), 400
     if 'head_rest' not in request.json:
-        return jsonify(probleme = "Valoare pt head_rest lipseste"), 400
+        return jsonify(message = "Valoare pt head_rest lipseste"), 400
     if 'back_rest' not in request.json:
-        return jsonify(probleme = "Valoare pt back_rest lipseste"), 400
+        return jsonify(message = "Valoare pt back_rest lipseste"), 400
     if 'arm_rest' not in request.json:
-        return jsonify(probleme = "Valoare pt arm_rest lipseste"), 400
+        return jsonify(message = "Valoare pt arm_rest lipseste"), 400
     if 'bum_rest' not in request.json:
-        return jsonify(probleme = "Valoare pt bum_rest lipseste"), 400
+        return jsonify(message = "Valoare pt bum_rest lipseste"), 400
     db = get_db()
     try:
         db.execute(
@@ -31,12 +31,12 @@ def add_temps():
         )
         db.commit()
     except db.IntegrityError:
-        return jsonify(probleme = "i dunno"), 500
+        return jsonify(message = "i dunno"), 500
     
     if temp is not None:
         adjust_temp(temp, request.json['head_rest'], request.json['back_rest'], request.json['arm_rest'], request.json['bum_rest'])
 
-    return jsonify(result = "ok"), 200
+    return jsonify(message = "ok"), 200
 
 def adjust_temp(temp, headrest, backrest, armrest, bumrest):
     mqtt.publish("scaun/incalzire", json.loads(sezut=bumrest >= temp, spatar=backrest >= temp, headrest=headrest >= temp, armrest=armrest >= temp))

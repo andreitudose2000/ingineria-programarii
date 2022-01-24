@@ -1,0 +1,191 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: SPAtaREST
+  description: A simple API to mock a smart chair
+
+servers:
+  - url: http://localhost:5000
+
+paths:
+  /weight/measure:
+    get:
+      description: Returns current measured weight
+      responses:
+        '200':
+          description: Successfully returned weight
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Weight'
+  
+  /weight/history:
+    get:
+      description: Returns history of measured weight
+      responses:
+        '200':
+          description: Successfully returned weights
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WeightHistory'
+  
+  /userInfo:
+    get:
+      description: Returns current user info
+      responses:
+        '200':
+          description: Successfully returned information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInfo'
+        '404':
+          $ref: '#/components/responses/404Error'
+    
+    post:
+      description: Lets a user post height for auto adjustments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Height'
+      responses:
+        '200':
+          $ref: '#/components/responses/200Ok'  
+        '400':
+          $ref: '#/components/responses/400Error'    
+  
+  /heat:
+    post:
+      description: Set trigger temperatures for heating
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Heating'
+      responses:
+        '200':
+          $ref: '#/components/responses/200Ok'  
+        '400':
+          $ref: '#/components/responses/400Error'   
+
+components:
+  schemas:
+    Weight:
+      type: object
+      properties:
+        weight:
+          type: integer
+          example: 75
+    
+    WeightHistory:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        mass:
+          type: integer
+          example: 75
+        updated_on:
+          type: string
+          format: date-time
+    
+    UserInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        user_height:
+          type: number
+          example: 175.3
+        chair_height:
+          type: number
+          example: 80
+        desk_height:
+          type: number
+          example: 120.2
+        updated_on:
+          type: string
+          format: date-time
+          
+    Height:
+      type: object
+      required:
+        - user_height
+      properties:
+        user_height:
+          type: number
+          example: 175
+          minimum: 100
+          maximum: 250
+    
+    Heating:
+      type: object
+      properties:
+        head_rest:
+          type: integer
+          example: 18
+        back_rest:
+          type: integer
+          example: 21
+        arm_rest:
+          type: integer
+          example: 23
+        bum_rest:
+          type: integer
+          example: 22
+
+  #  ----- Added lines  ----------------------------------------
+  parameters:
+    PageLimit:
+      name: limit
+      in: query
+      description: Limits the number of items on a page
+      schema:
+        type: integer
+      
+    PageOffset:
+      name: offset
+      in: query
+      description: Specifies the page number of the artists to be displayed
+      schema:
+        type: integer
+
+  responses:
+    200Ok:
+      description: Successful
+      content:
+        application/json:
+          schema:
+            type: object 
+            properties:
+              message:
+                type: string
+                example: Ok
+    400Error:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            type: object 
+            properties:
+              message:
+                type: string
+                example: Data may be wrong
+    404Error:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            type: object 
+            properties:
+              message:
+                type: string
+                example: We did not find result
