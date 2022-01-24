@@ -36,7 +36,7 @@ def add_temps():
     if temp is not None:
         adjust_temp(temp, request.json['head_rest'], request.json['back_rest'], request.json['arm_rest'], request.json['bum_rest'])
 
-    return jsonify(probleme = "ok"), 200
+    return jsonify(result = "ok"), 200
 
 def adjust_temp(temp, headrest, backrest, armrest, bumrest):
     mqtt.publish("scaun/incalzire", json.loads(sezut=bumrest >= temp, spatar=backrest >= temp, headrest=headrest >= temp, armrest=armrest >= temp))
