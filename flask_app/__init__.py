@@ -1,8 +1,12 @@
 import os
-import sys
+import random
+import time
+from threading import Thread
 
 from flask import Flask, jsonify
 from flask_mqtt import Mqtt
+
+
 
 # error functions
 def page_not_found(e):
@@ -26,21 +30,28 @@ def add_mqtt(app):
     mqtt.init_app(app)
     return mqtt
 
+
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
-    mqtt.subscribe('home/1')
-    mqtt.subscribe('incalzire')
-    mqtt.subscribe('temperature')
+    mqtt.subscribe("home/1")
+
+    mqtt.subscribe("scaun/user_asezat")
+    from mqtt import publisher_sensor_scaun
+    publisher_sensor_scaun.mqtt = mqtt
+    publisher_sensor_scaun.on_connect()
+
+    mqtt.subscribe('scaun/incalzire')
+    mqtt.subscribe('camera/temperatura')
+
 
 # print the message, later more logic
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
     print(f"Topic: {message.topic} Mesaj: {message.payload.decode()} ")
 
-    if(message.topic == 'temperature'):
+    if message.topic == 'camera/temperatura':
         from . import heat
         heat.new_temp(int(message.payload.decode()))
-
 
 # app factory
 def create_app(test_config=None, db_file=None):

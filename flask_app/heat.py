@@ -3,6 +3,7 @@ from tokenize import Number
 from unicodedata import numeric
 from flask import (Blueprint, g, request, jsonify, current_app)
 from flask_app.db import get_db
+import json
 
 bp = Blueprint('heat', __name__, url_prefix='/heat')
 
@@ -33,13 +34,14 @@ def add_temps():
     except db.IntegrityError:
         return jsonify(probleme = "i dunno"), 500
     
-    if(temp is not None):
+    if temp is not None:
         adjust_temp(temp, request.json['headrest'], request.json['backrest'], request.json['armrest'], request.json['bumrest'])
 
     return jsonify(probleme = "ok"), 200
 
 def adjust_temp(temp, headrest, backrest, armrest, bumrest):
-    mqtt.publish("incalzire", f'sezut: {bumrest >= temp}; spatar: {backrest >= temp}; headrest: {headrest >= temp}; armrest: {armrest >= temp}')
+    mqtt.publish("scaun/incalzire", f'sezut: {bumrest >= temp}; spatar: {backrest >= temp}; headrest: {headrest >= temp}; armrest: {armrest >= temp}')
+    mqtt.publish("scaun/incalzire", json.loads(sezut=bumrest >= temp, spatar=backrest >= temp, headrest=headrest >= temp, armrest=armrest >= temp))
 
 def new_temp(temper):
     with app.app_context():

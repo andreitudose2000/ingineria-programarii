@@ -35,7 +35,7 @@ def background_thread():
         x = randint(-1, 1)
         temp = temp + x
         time.sleep(10)
-        mqtt.publish('temperature', temp)
+        mqtt.publish('camera/temperatura', temp)
 
 def create_app(test_config=None):
     # create and configure the app
