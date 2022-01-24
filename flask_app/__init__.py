@@ -108,4 +108,7 @@ def create_app(test_config=None, db_file=None):
     heat.mqtt = mqtt
     heat.app = app
 
+    from . import weight
+    app.register_blueprint(weight.bp)
+
     return app
