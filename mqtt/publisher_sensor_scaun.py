@@ -3,9 +3,12 @@ import random
 import time
 from threading import Thread
 
+from flask_app.db import get_db
+
 mqtt = None
 chairSensorThread = None
 asezat = False
+db = None
 
 def on_connect():
     global chairSensorThread
@@ -22,3 +25,8 @@ def chair_sensor_thread():
         if chance <= 1:
             asezat = not asezat
             mqtt.publish("scaun/user_asezat", asezat)
+
+
+def chair_sensor_alert_thread():
+    while True:
+        time.sleep(300)
