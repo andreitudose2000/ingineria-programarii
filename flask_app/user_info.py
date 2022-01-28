@@ -1,17 +1,12 @@
 from flask import (Blueprint, request, jsonify)
 from flask_app.db import get_db
 import utils
-import json
 
 bp = Blueprint('userInfo', __name__, url_prefix='/userInfo')
 
 @bp.route('/', methods=(['GET']))
-def getUserInfo():
-    userInfo = get_db().execute(
-        'SELECT id, user_height, chair_height, desk_height, updated_on \
-        FROM user_info \
-        ORDER BY updated_on DESC'
-    ).fetchone()
+def getUserInfoEndpoint():
+    userInfo = getUserInfo()
 
     if userInfo is None:
         return jsonify(message="Nu exista setari pentru utilizator"), 404
@@ -24,8 +19,17 @@ def getUserInfo():
         "updated_on": userInfo["updated_on"]
     }), 200
 
+def getUserInfo():
+    userInfo = get_db().execute(
+        'SELECT id, user_height, chair_height, desk_height, updated_on \
+        FROM user_info \
+        ORDER BY updated_on DESC'
+    ).fetchone()
+
+    return userInfo
+
 @bp.route('/', methods=(['POST']))
-def setUserInfo():
+def setUserInfoEndpoint():
     if not request.json:
         return jsonify(message="Nu ati trimis setari"), 400
     if 'user_height' not in request.json:

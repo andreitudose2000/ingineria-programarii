@@ -1,11 +1,7 @@
 import os
-import random
-import time
-from threading import Thread
 
 from flask import Flask, jsonify
 from flask_mqtt import Mqtt
-
 
 
 # error functions
@@ -17,6 +13,7 @@ def internal(e):
 
 # add mqtt app
 mqtt = Mqtt()
+flask_app = None
 
 def add_mqtt(app):
     print('apelat')
@@ -36,8 +33,10 @@ def handle_connect(client, userdata, flags, rc):
     mqtt.subscribe("home/1")
 
     mqtt.subscribe("scaun/user_asezat")
+    mqtt.subscribe("scaun/avertisment")
     from mqtt import publisher_sensor_scaun
     publisher_sensor_scaun.mqtt = mqtt
+    publisher_sensor_scaun.flask_app = flask_app
     publisher_sensor_scaun.on_connect()
 
     mqtt.subscribe('scaun/incalzire')
@@ -47,7 +46,7 @@ def handle_connect(client, userdata, flags, rc):
 # print the message, later more logic
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
-    print(f"Topic: {message.topic} Mesaj: {message.payload.decode()} ")
+    print(f"Mesaj MQTT --- Topic: {message.topic} Mesaj: {message.payload.decode()} ")
 
     if message.topic == 'camera/temperatura':
         from . import heat
@@ -89,9 +88,6 @@ def create_app(test_config=None, db_file=None):
     def hello():
         return 'Hello, World!'
 
-    # Adding mqtt app
-    add_mqtt(app)
-
     # Adding blueprints/controllers
     from . import poc
     app.register_blueprint(poc.bp)
@@ -110,5 +106,11 @@ def create_app(test_config=None, db_file=None):
 
     from . import weight
     app.register_blueprint(weight.bp)
+
+    global flask_app
+    flask_app = app
+
+    # Adding mqtt app
+    add_mqtt(app)
 
     return app
