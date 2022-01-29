@@ -12,9 +12,9 @@ def internal(e):
         return jsonify(error=str(e)), 500
 
 # add mqtt app
-
 flask_app = None
 mqtt = Mqtt()
+
 def add_mqtt(app):
     app.config['MQTT_BROKER_URL'] = 'localhost'  # use the free broker from HIVEMQ
     app.config['MQTT_BROKER_PORT'] = 1883  # default port for non-tls connection
