@@ -12,11 +12,10 @@ def internal(e):
         return jsonify(error=str(e)), 500
 
 # add mqtt app
-mqtt = Mqtt()
-flask_app = None
 
+flask_app = None
+mqtt = Mqtt()
 def add_mqtt(app):
-    print('apelat')
     app.config['MQTT_BROKER_URL'] = 'localhost'  # use the free broker from HIVEMQ
     app.config['MQTT_BROKER_PORT'] = 1883  # default port for non-tls connection
     app.config['MQTT_USERNAME'] = ''  # set the username here if you need authentication for the broker
@@ -31,13 +30,14 @@ def add_mqtt(app):
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
     mqtt.subscribe("home/1")
+    mqtt.subscribe("aa")
 
     mqtt.subscribe("scaun/user_asezat")
     mqtt.subscribe("scaun/avertisment")
-    from mqtt import publisher_sensor_scaun
-    publisher_sensor_scaun.mqtt = mqtt
-    publisher_sensor_scaun.flask_app = flask_app
-    publisher_sensor_scaun.on_connect()
+    from mqtt import publisher_chair_sensor
+    publisher_chair_sensor.mqtt = mqtt
+    publisher_chair_sensor.flask_app = flask_app
+    publisher_chair_sensor.on_connect()
 
     mqtt.subscribe('scaun/incalzire')
     mqtt.subscribe('camera/temperatura')
@@ -46,7 +46,7 @@ def handle_connect(client, userdata, flags, rc):
 # print the message, later more logic
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
-    print(f"Mesaj MQTT --- Topic: {message.topic} Mesaj: {message.payload.decode()} ")
+    print(f"MQTT message --- topic: {message.topic}; message: {message.payload.decode()} ")
 
     if message.topic == 'camera/temperatura':
         from . import heat
@@ -89,15 +89,8 @@ def create_app(test_config=None, db_file=None):
         return 'Hello, World!'
 
     # Adding blueprints/controllers
-    from . import poc
-    app.register_blueprint(poc.bp)
-
     from . import user_info
     app.register_blueprint(user_info.bp)
-
-    from . import poc_mqtt
-    app.register_blueprint(poc_mqtt.bp)
-    poc_mqtt.mqtt = mqtt
 
     from . import heat
     app.register_blueprint(heat.bp)

@@ -4,3 +4,6 @@ def chair_height_formula(user_height_input):
 
 def desk_height_formula(user_height_input):
     return round(0.68 * user_height_input - 4.8, 1)
+
+def dict_from_row(row):
+    return dict(zip(row.keys(), row))

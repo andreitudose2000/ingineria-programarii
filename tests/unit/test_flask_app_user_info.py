@@ -1,9 +1,10 @@
+import json
 import os
 import tempfile
+
 import pytest
-import json
-import utils
-from flask_app import create_app
+
+from flask_app import create_app, utils
 
 
 @pytest.fixture()
@@ -22,17 +23,17 @@ def tester():
     # sterg fisierul de pe disk
     os.unlink(app.config['DATABASE'])
 
-
-def addOneUserInfoRow(tester):
-    postData = {
+@pytest.mark.skip
+def add_one_row_to_db(tester):
+    post_data = {
         "user_height": 180
     }
-    response = tester.post("/userInfo/", json=postData, follow_redirects=True)
-    return response, postData
+    response = tester.post("/userInfo/", json=post_data, follow_redirects=True)
+    return response, post_data
 
 
 def test_user_info_post_201(tester):
-    response, _ = addOneUserInfoRow(tester)
+    response, _ = add_one_row_to_db(tester)
     assert response.status_code == 201
 
 
@@ -69,12 +70,12 @@ def test_user_info_get_404(tester):
 
 
 def test_user_info_get_200(tester):
-    _, postData = addOneUserInfoRow(tester)
+    _, post_data = add_one_row_to_db(tester)
     response = tester.get("/userInfo/")
     assert response.status_code == 200
     data = json.loads(response.data)
     print(data)
     assert data["id"] == 1 \
-           and data["user_height"] == postData["user_height"] \
-           and data["chair_height"] == utils.chair_height_formula(postData["user_height"]) \
-           and data["desk_height"] == utils.desk_height_formula(postData["user_height"])
+           and data["user_height"] == post_data["user_height"] \
+           and data["chair_height"] == utils.chair_height_formula(post_data["user_height"]) \
+           and data["desk_height"] == utils.desk_height_formula(post_data["user_height"])
