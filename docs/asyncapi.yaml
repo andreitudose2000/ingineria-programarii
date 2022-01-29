@@ -39,7 +39,7 @@ channels:
     subscribe:
       message:
         $ref: "#/components/messages/temperatura"
-      
+
 components:
   messages:
     asezat_pe_scaun:

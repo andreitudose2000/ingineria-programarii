@@ -23,6 +23,7 @@ def add_mqtt(app):
 
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
+    print("Heat connected to MQTT")
     global thread
     if thread is None:
         thread = Thread(target=background_thread)
