@@ -1,7 +1,7 @@
 [run]
 command_line=-m pytest
 omit=
-    config.py
+    flask_app/config.py
     tests/*
     mqtt/*
 

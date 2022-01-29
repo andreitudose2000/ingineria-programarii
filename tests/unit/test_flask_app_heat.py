@@ -12,7 +12,7 @@ from flask_app import create_app
 def tester():
     # creez un fisier nou temporar .sqlite unde va fi stocata baza de date
     db_fd, dbfile = tempfile.mkstemp(suffix=".sqlite")
-    app = create_app("config.TestingConfig", db_file=dbfile)
+    app = create_app("flask_configurations.TestingConfig", db_file=dbfile)
 
     # returnez clientul tester cu setarea de mai sus
     with app.test_client() as tester:
