@@ -1,6 +1,6 @@
 from flask import (Blueprint, request, jsonify)
 from flask_app.db import get_db
-import utils
+from flask_app import utils
 
 bp = Blueprint('userInfo', __name__, url_prefix='/userInfo')
 
@@ -45,10 +45,14 @@ def setUserInfoEndpoint():
         return jsonify(message='"user_height" trebuie sa fie integer'), 400
 
     db = get_db()
+    chair_height = utils.chair_height_formula(user_height)
+    desk_height = utils.desk_height_formula(user_height)
     try:
         db.execute("INSERT INTO user_info (user_height, chair_height, desk_height) VALUES (?, ?, ?)",
-                   (user_height, utils.chair_height_formula(user_height), utils.desk_height_formula(user_height)))
+                   (user_height, chair_height, desk_height))
         db.commit()
+        print(f"## Updated in db table 'user_info' - 'user_height' = {user_height}; 'chair_height'={chair_height}; "
+              f"'desk_height'={desk_height}")
     except db.Error:
         return jsonify(message="Eroare la introducerea in baza de date"), 400
 

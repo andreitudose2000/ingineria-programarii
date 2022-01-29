@@ -9,12 +9,15 @@ def measure_weight():
     return random.randint(70, 100)
 
 def add_weight_to_db(weight):
+    if not isinstance(weight, int) and not isinstance(weight, float):
+        raise ValueError
     db = get_db()
     db.execute(
         "INSERT INTO user_weight (mass) VALUES (?)",
         (weight,),
     )
     db.commit()
+    print(f"## Updated in db table 'user_weight' - 'weight' = {weight}")
 
 def get_current_weight():
     weight = measure_weight()

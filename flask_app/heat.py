@@ -20,6 +20,8 @@ def add_to_db(head_rest, back_rest, arm_rest, bum_rest):
             (head_rest, back_rest, arm_rest, bum_rest),
         )
         db.commit()
+        print(f"## Updated in db table 'heat' - 'head_rest' = {head_rest}; 'back_rest'={back_rest}; "
+              f"'arm_rest'={arm_rest}; 'head_rest'={bum_rest}")
     except db.IntegrityError:
         return False
     return True
@@ -28,15 +30,12 @@ def add_to_db(head_rest, back_rest, arm_rest, bum_rest):
 def add_temps():
     if not request.json:
         return jsonify(message = "Lipseste body"), 400
-    if 'head_rest' not in request.json:
-        return jsonify(message = "Valoare pt head_rest lipseste"), 400
-    if 'back_rest' not in request.json:
-        return jsonify(message = "Valoare pt back_rest lipseste"), 400
-    if 'arm_rest' not in request.json:
-        return jsonify(message = "Valoare pt arm_rest lipseste"), 400
-    if 'bum_rest' not in request.json:
-        return jsonify(message = "Valoare pt bum_rest lipseste"), 400
-    
+    for part in ['head_rest', 'back_rest', 'arm_rest', 'bum_rest']:
+        if part not in request.json:
+            return jsonify(message=f"Valoare pt {part} lipseste"), 400
+        if not isinstance(request.json[part], int):
+            return jsonify(message=f"Valoarea pt {part} trebuie sa fie integer"), 400
+
     if not add_to_db(request.json['head_rest'], request.json['back_rest'], request.json['arm_rest'], request.json['bum_rest']):
         return jsonify(message = "Db problem"), 500
     
@@ -44,8 +43,6 @@ def add_temps():
         adjust_temp(temp, request.json['head_rest'], request.json['back_rest'], request.json['arm_rest'], request.json['bum_rest'])
 
     return jsonify(message = "ok"), 200
-
-
 
 def adjust_temp(temp, headrest, backrest, armrest, bumrest):
     mqtt.publish("scaun/incalzire", json.loads(sezut=bumrest >= temp, spatar=backrest >= temp, headrest=headrest >= temp, armrest=armrest >= temp))
