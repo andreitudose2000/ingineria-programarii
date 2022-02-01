@@ -43,8 +43,8 @@ def test_post_heat_check_heat_200(tester):
     response = tester.post("/heat", json=post_data, follow_redirects=True)
     assert response.status_code == 200
     assert json.loads(response.data) == {"message": "ok"}
-    response1 = tester.get("/userInfo")
-    assert response1.status_code == 200
+    response1 = tester.get("/userInfo", follow_redirects=True)
+    assert response1.status_code == 404
     data = json.loads(response1.data)
     print(data)
 
@@ -57,11 +57,11 @@ def test_post_heat_get_userInfo_redirect(tester):
         "arm_rest": 23,
         "bum_rest": 22
     }
-    response = tester.post("/heat/", json=post_data, follow_redirects=True)
+    response = tester.post("/heat", json=post_data)
     assert response.status_code == 308
-    assert json.loads(response.data) == {"message": "ok"}
-    response = tester.get("/userInfo")
-    assert response.status_code == 200
+    # assert json.loads(response.data) == {"message": "ok"}
+    response = tester.get("/userInfo", follow_redirects=True)
+    assert response.status_code == 404
 
 
 def test_user_info_heat_get_200(tester):
@@ -75,7 +75,7 @@ def test_user_info_heat_get_200(tester):
     assert response.status_code == 400
     assert json.loads(response.data) == {"message": "Valoarea pt bum_rest trebuie sa fie integer"}
     _, post_data = add_one_row_to_db(tester)
-    response1 = tester.get("/userInfo")
+    response1 = tester.get("/userInfo", follow_redirects=True)
     assert response1.status_code == 200
     data = json.loads(response1.data)
     print(data)
@@ -92,9 +92,8 @@ def test_post_heat_post_weight_redirect(tester):
         "arm_rest": 23,
         "bum_rest": 22
     }
-    response = tester.post("/heat/", json=post_data, follow_redirects=True)
+    response = tester.post("/heat", json=post_data)
     assert response.status_code == 308
-    assert json.loads(response.data) == {"message": "ok"}
 
     from flask_app.weight import add_weight_to_db
 
@@ -102,7 +101,7 @@ def test_post_heat_post_weight_redirect(tester):
     add_weight_to_db(90)
     add_weight_to_db(100)
     now = datetime.now()
-    response1 = tester.get("/weight/history")
+    response1 = tester.get("/weight/history", follow_redirects=True)
     assert response1.status_code == 200
     data = json.loads(response1.data)
     assert isinstance(data, list)
@@ -116,8 +115,8 @@ def test_post_heat_post_weight_redirect(tester):
 
 
 def test_get_weight_post_heat_redirect(tester):
-    response = tester.get("/weight/history/")
-    assert response.status_code == 308
+    response = tester.get("/weight/history")
+    assert response.status_code == 200
     post_data = {
         "head_rest": 18,
         "back_rest": 21,
@@ -132,7 +131,7 @@ def test_get_weight_post_heat_redirect(tester):
 def test_get_measure_get_history(tester):
     response = tester.get("/weight/measure")
     assert response.status_code == 200
-    response1 = tester.get("/weight/history")
+    response1 = tester.get("/weight/history", follow_redirects=True)
     assert response1.status_code == 200
 
 

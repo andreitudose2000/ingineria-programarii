@@ -35,7 +35,7 @@ def test_measure_get(tester):
 
 
 def test_history_get(tester):
-    response = tester.get("/weight/history")
+    response = tester.get("/weight/history", follow_redirects=True)
     assert response.status_code == 200
     data = json.loads(response.data)
     assert isinstance(data, list)
@@ -48,7 +48,7 @@ def test_history_get_with_data(tester):
     add_weight_to_db(90)
     add_weight_to_db(100)
     now = datetime.now()
-    response = tester.get("/weight/history")
+    response = tester.get("/weight/history", follow_redirects=True)
     assert response.status_code == 200
     data = json.loads(response.data)
     assert isinstance(data, list)
