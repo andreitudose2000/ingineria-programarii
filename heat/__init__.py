@@ -33,9 +33,10 @@ def handle_connect(client, userdata, flags, rc):
 def background_thread():
     global temp
     while True:
+        time.sleep(10)
         x = randint(-1, 1)
         temp = temp + x
-        time.sleep(10)
+        print(temp)
         mqtt.publish('camera/temperatura', temp)
 
 def create_app(test_config=None):

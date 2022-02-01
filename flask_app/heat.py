@@ -45,7 +45,7 @@ def add_temps():
     return jsonify(message = "ok"), 200
 
 def adjust_temp(temp, headrest, backrest, armrest, bumrest):
-    mqtt.publish("scaun/incalzire", json.loads(sezut=bumrest >= temp, spatar=backrest >= temp, headrest=headrest >= temp, armrest=armrest >= temp))
+    mqtt.publish("scaun/incalzire", json.dumps({"sezut":bumrest >= temp, "spatar":backrest >= temp, "headrest":headrest >= temp, "armrest":armrest >= temp}))
 
 def fetch_last_settings():
     db = get_db()
