@@ -57,3 +57,11 @@ Restler.exe test --grammar_file .\Compile\grammar.json --dictionary_file .\Compi
 # Fuzz
 Restler.exe fuzz-lean --grammar_file .\Compile\grammar.json --dictionary_file .\Compile.\dict.json --no_ssl
 ```
+
+## Driver
+S-a folosit tool-ul [electron](https://www.electronjs.org/). 
+```bash
+npm install
+
+npm run electron
+```
