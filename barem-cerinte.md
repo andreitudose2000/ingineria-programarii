@@ -21,5 +21,5 @@
  - [ ] **1.5p** Automation tests cu RESTler
  - [x] **0.5p** Test coverage >= 80%
 ### Documentatie
- - [ ] **1p** Document de analiza
+ - [x] **1p** Document de analiza
  - [ ] **1p** Document de utilizare 
