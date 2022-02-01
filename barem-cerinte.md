@@ -22,4 +22,4 @@
  - [x] **0.5p** Test coverage >= 80%
 ### Documentatie
  - [x] **1p** Document de analiza
- - [ ] **1p** Document de utilizare 
+ - [x] **1p** Document de utilizare 
