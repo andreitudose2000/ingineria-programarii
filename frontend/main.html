@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link href="styles.css" rel="stylesheet" type="text/css" />
+    </head>
+    
+    <body>
+
+        <!-- Title bar -->
+        <div class="title-bar draggable">
+            <div class="title-bar-closeapp-button title-bar-close-button no-draggable" id="close-app">
+                <label>&#10006;</label>
+            </div>
+            <div class="title-bar-minimize-button title-bar-minus-button no-draggable" id="minimize-app">
+                <label>&minus;</label>
+            </div>
+        </div>
+
+        <!-- All content of app -->
+        <div class="main-container no-draggable">
+    
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div>
+                    <h1>Smart Chair</h1>
+                
+                    <!-- Overview Button -->
+                    <div class="sidebar-button">
+                        <a href="#">
+                            <div class="sidebar-icon-div">
+                                <img src="resources/vectors/overview.svg"/>
+                                <span>Overview</span>
+                            </div>
+    
+                        </a>
+                    </div>
+    
+                    <!-- Settings Button -->
+                    <div class="sidebar-button">
+                        <a href="#">
+                            <div class="sidebar-icon-div">
+                                <img src="resources/vectors/settings.svg"/>
+                                <span>Settings</span>
+                            </div>
+    
+                        </a>
+                    </div>                    
+                </div>
+
+
+                <!-- Lock computer -->
+                <div class="right-panel-item">
+                    <div class="user-input-title">
+                        <label>Lock Computer</label>
+                    </div>
+                    <div class="user-input-value">
+                        <div class="toggle" id="lock-toggle">
+                            <div class="toggle-button"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+    
+            <!-- Main Content -->
+            <div class="content-container">
+                <div class="content-container-padded">
+    
+                    <!-- Content title -->
+                    <div class="overview-div">
+                        <div>
+                            <label class="page-title-text">Overview</label>
+                        </div>
+                        <div>
+                            <div>
+                                <button id="refresh-button" class="button-overview button-overview-refresh">Refresh</button>
+                                <button id="save-button" class="button-overview button-overview-save">Save</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+    
+                    <!-- Biometrics of chair 4 elements -->
+                    <div class="biometrics-content">
+    
+                        <!-- Chair Height -->
+                        <div class="biometrics-item">
+                            <div class="biometrics-item-label">
+                                <label>Chair Height</label>
+                            </div>
+                            <div class="biometrics-item-value">
+                                <label id="biometrics-value-chairheight"></label>
+                            </div>
+                        </div>
+                        
+                        <!-- Table Height -->
+                        <div class="biometrics-item">
+                            <div class="biometrics-item-label">
+                                <label>Desk Height</label>
+                            </div>
+                            <div class="biometrics-item-value">
+                                <label id="biometrics-value-deskheight"></label>
+                            </div>
+                        </div>
+
+                        <!-- Room Temperature -->
+                        <div class="biometrics-item">
+                            <div class="biometrics-item-label">
+                                <label>Room Temperature</label>
+                            </div>
+                            <div class="biometrics-item-value">
+                                <label id="biometrics-value-roomtemperature">21°C</label>
+                            </div>
+                        </div>
+    
+                        <!-- Weight -->
+                        <div class="biometrics-item">
+                            <div class="biometrics-item-label">
+                                <label>Weight</label>
+                            </div>
+                            <div class="biometrics-item-value">
+                                <label id="biometrics-value-weight"></label>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- User input and chair panel -->
+                    <div class="user-input-content">
+
+                        <!-- Left Panel -->
+                        <div class="left-panel">
+                            <div class="left-panel-title-div"><label>Biometrics</label></div>
+                            <div class="left-panel-heating-display">
+                                <h3 id="left-panel-seat-heating-value">Seat heating: OFF</h3>
+                                <h3 id="left-panel-backrest-heating-value">Backrest heating: OFF</h3>
+                                <h3 id="left-panel-headrest-heating-value">Headrest heating: OFF</h3>
+                                <h3 id="left-panel-armrest-heating-value">Armrest heating: OFF</h3>
+                            </div>
+                            <div class="left-panel-image-div" id="renderer-canvas"></div>
+                        </div>
+
+                        <!-- Right Panel -->
+                        <div class="right-panel">
+
+                            <!-- User height -->
+                            <div class="right-panel-item right-panel-border">
+                                <div class="user-input-title">
+                                    <label>Height</label>
+                                </div>
+                                <div class="user-input-value">
+                                    <div class="user-input-minus" id="user-height-minus">
+                                        <img src="resources/vectors/minus.svg" />
+                                    </div>
+                                    <div class="user-input-display-value">
+                                        <label id="user-height-value"></label>
+                                    </div>
+                                    <div class="user-input-plus" id="user-height-plus">
+                                        <img src="resources/vectors/plus.svg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Seat heating -->
+                            <div class="right-panel-item right-panel-border">
+                                <div class="user-input-title">
+                                    <label>Seat Heating</label>
+                                </div>
+                                <div class="user-input-value">
+                                    <div class="user-input-minus" id="seat-heating-minus">
+                                        <img src="resources/vectors/minus.svg" />
+                                    </div>
+                                    <div class="user-input-display-value">
+                                        <label id="seat-heating-value">21°C</label>
+                                    </div>
+                                    <div class="user-input-plus" id="seat-heating-plus">
+                                        <img src="resources/vectors/plus.svg" />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Backrest heating -->
+                            <div class="right-panel-item right-panel-border">
+                                <div class="user-input-title">
+                                    <label>Backrest Heating</label>
+                                </div>
+                                <div class="user-input-value">
+                                    <div class="user-input-minus" id="backrest-heating-minus">
+                                        <img src="resources/vectors/minus.svg" />
+                                    </div>
+                                    <div class="user-input-display-value">
+                                        <label id="backrest-heating-value">21°C</label>
+                                    </div>
+                                    <div class="user-input-plus" id="backrest-heating-plus">
+                                        <img src="resources/vectors/plus.svg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Headrest heating -->
+                            <div class="right-panel-item right-panel-border">
+                                <div class="user-input-title">
+                                    <label>Headrest Heating</label>
+                                </div>
+                                <div class="user-input-value">
+                                    <div class="user-input-minus" id="headrest-heating-minus">
+                                        <img src="resources/vectors/minus.svg" />
+                                    </div>
+                                    <div class="user-input-display-value">
+                                        <label id="headrest-heating-value">21°C</label>
+                                    </div>
+                                    <div class="user-input-plus" id="headrest-heating-plus">
+                                        <img src="resources/vectors/plus.svg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Armrest heating -->
+                            <div class="right-panel-item right-panel-border">
+                                <div class="user-input-title">
+                                    <label>Armrest Heating</label>
+                                </div>
+                                <div class="user-input-value">
+                                    <div class="user-input-minus" id="armrest-heating-minus">
+                                        <img src="resources/vectors/minus.svg" />
+                                    </div>
+                                    <div class="user-input-display-value">
+                                        <label id="armrest-heating-value">21°C</label>
+                                    </div>
+                                    <div class="user-input-plus" id="armrest-heating-plus">
+                                        <img src="resources/vectors/plus.svg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="module" src="js/main.js"></script>
+        <script type="module" src="js/renderer.js"></script>
+        <script type="module" src="js/subscriptions.js"></script>
+    </body>
+</html>
