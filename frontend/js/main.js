@@ -35,7 +35,7 @@ const getWeightPromise = new Promise(function(resolve, reject) {
 // Promise for user info
 const getUserInfoPromise = new Promise(function(resolve, reject) {
     void (async () => {
-        const url = HOST + '/userInfo';
+        const url = HOST + '/userInfo/';
         const defaultOptions = { method: 'GET' };
 
         const response = await request(url, defaultOptions);
@@ -82,7 +82,7 @@ getUserInfoPromise.then(function whenOk(response) {
     if (response['message']) {
         // No data in db, POST default values
         void (async () => {
-            const url = HOST + '/userInfo';
+            const url = HOST + '/userInfo/';
             const defaultOptions = { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({user_height: 175})};
 
             const response_2 = await request(url, defaultOptions);
@@ -126,7 +126,7 @@ getUserInfoPromise.then(function whenOk(response) {
 
     // Save default heatings values
     void (async () => {
-        const url = HOST + '/heat';
+        const url = HOST + '/heat/';
         const defaultOptions = { 
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -188,7 +188,7 @@ refresh_button.addEventListener("click", () => {
 save_button.addEventListener("click", () => {
     const saveUserInfoData = new Promise(function(resolve, reject) {
         void (async () => {
-            const url = HOST + '/userInfo';
+            const url = HOST + '/userInfo/';
             const defaultOptions = { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({user_height: user_height_value_content})};
 
             const response_2 = await request(url, defaultOptions);
@@ -205,7 +205,7 @@ save_button.addEventListener("click", () => {
 
     saveUserInfoData.then(function whenOk(response) {
         void (async () => {
-            const url = HOST + '/userInfo';
+            const url = HOST + '/userInfo/';
             const defaultOptions = { method: 'GET' };
     
             const response2 = await request(url, defaultOptions);
@@ -229,7 +229,7 @@ save_button.addEventListener("click", () => {
 
     // SAVE HEATINGS
     void (async () => {
-        const url = HOST + '/heat';
+        const url = HOST + '/heat/';
         const defaultOptions = { 
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
