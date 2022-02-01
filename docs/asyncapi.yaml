@@ -1,0 +1,82 @@
+# https://playground.asyncapi.io/
+
+asyncapi: 2.2.0
+
+info:
+  title: SPAtaREST MQTT
+  version: "1.0"
+
+servers:
+  development:
+    url: tcp://localhost:1883
+    description: Mosquitto Server
+    protocol: mqtt
+
+channels:
+  scaun/user_asezat:
+    description: Evenimentele de ridicat / asezat pe scaun
+    publish:
+      message:
+        $ref: "#/components/messages/asezat_pe_scaun"
+    subscribe:
+      message:
+        $ref: "#/components/messages/asezat_pe_scaun"
+        
+  scaun/incalzire:
+    description: Comenzile de incalzire a scaunului
+    publish:
+      message:
+        $ref: "#/components/messages/incalzire"
+    subscribe:
+      message:
+        $ref: "#/components/messages/incalzire"
+        
+  camera/temperatura:
+    description: Temperatura camerei in timp real
+    publish:
+      message:
+        $ref: "#/components/messages/temperatura"
+    subscribe:
+      message:
+        $ref: "#/components/messages/temperatura"
+
+components:
+  messages:
+    asezat_pe_scaun:
+      name: asezat_pe_scaun
+      description: True daca utilizatorul este asezat pe scaun si False daca nu
+      payload:
+        type: boolean
+        examples:
+          - "True"
+          - "False"
+
+    incalzire:
+      name: incalzire
+      description: Indicatii pentru incalzirea pe fiecare piesa componenta a scaunului
+      payload:
+        type: object
+        properties:
+          sezut:
+            type: boolean
+          spatar:
+            type: boolean
+          headrest:
+            type: boolean
+          armrest:
+            type: boolean
+        examples:
+          - sezut: true
+            spatar: true
+            headrest: false
+            armrest: false
+            
+    temperatura:
+      name: temperatura
+      description: Valoarea temperaturii din camera in grade Celsius
+      payload:
+        type: integer
+        examples:
+          - 14
+          - 20
+          - 32

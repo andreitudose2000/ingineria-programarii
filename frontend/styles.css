@@ -1,0 +1,431 @@
+@font-face {
+    font-family: 'Mulish';
+    src: url('resources/fonts/Mulish-Regular.ttf') format("truetype");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Mulish-SemiBold';
+    src: url('resources/fonts/Mulish-SemiBold.ttf') format("truetype");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Mulish-Bold';
+    src: url('resources/fonts/Mulish-Bold.ttf') format("truetype");
+    font-weight: normal;
+}
+
+.draggable {
+    -webkit-app-region: drag;
+}
+
+.no-draggable {
+    -webkit-app-region: no-drag;
+}
+
+html {
+    -webkit-user-select: none;      
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body {
+    margin: 0;
+}
+
+.title-bar {
+    height: 30px;
+    background: #2b2b38;  
+}
+
+.title-bar-closeapp-button {
+    color: white;
+    float: right;
+    height: 27px;
+    padding-top: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: #2b2b38;
+    transition: 0.2s;
+}
+
+.title-bar-minimize-button {
+    color: white;
+    float: right;
+    height: 24px;
+    padding-top: 6px;
+    padding-left: 12px;
+    padding-right: 12px;
+    background: #2b2b38;
+    transition: 0.2s;
+}
+
+.title-bar-close-button:hover {
+    background: crimson;
+    transition: 0.2s;
+}
+
+.title-bar-minus-button:hover {
+    background: #3E4049;
+    transition: 0.2s;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 255px;
+    top: 0;
+    left: 0;
+    background: #363740;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.sidebar h1 {
+    display: block;
+    padding: 10px 20px;
+    color: #A4A6B3;
+    text-decoration: none;
+    font-family: "Mulish-Bold";
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: default;
+}
+
+.sidebar a {
+    display: block;
+    padding: 0px 20px;
+    color: #A4A6B3;
+    background: #363740;
+    text-decoration: none;
+    font-family: "Mulish";
+    font-weight: normal;
+    letter-spacing: 2px;
+    transition: 0.3s;
+    height: 56px;
+    line-height: 56px;
+}
+
+.sidebar-button {
+    background: #DDE2FF;
+}
+
+.sidebar-button a:hover{
+    color: #DDE2FF;
+    margin-left: 3px;
+    transition: 0.3s;
+    background: #3E4049;
+}
+
+.sidebar-icon-div {
+    display: flex;
+}
+
+.sidebar-button a img {
+    width: 15px;
+    margin-right: 30px;
+    margin-left: 10px;
+}
+
+
+/* Main Content */
+
+.content-container {
+    background: #F7FAFC;
+    flex-grow: 1;
+    padding: 30px;
+}
+
+.content-container-padded {
+    width: 100%;
+    height: 100%;
+    background: #F7FAFC;
+}
+
+/* Page title */
+
+.page-title-text {
+    font-family: "Mulish-Bold";
+    font-size: 20px;
+    color: #363740;
+}
+
+.overview-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.button-overview {
+    font-family: "Mulish-Bold";
+    border: none;
+    color: #363740;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 8px;
+    border: 1px #DFE0EB solid;
+    transition: 0.2s;
+}
+
+.button-overview-refresh {
+    background-color: white;
+    margin-right: 10px;
+}
+
+.button-overview-save {
+    background-color: white;
+    padding: 15px 40px;
+}
+
+.button-overview:hover {
+    cursor: pointer;
+    background-color: #F7FAFC;
+    transition: 0.2s;
+}
+
+.button-overview-refresh:active {
+    background-color: #DFEBEB;
+}
+
+.button-overview-save:active {
+    background-color: #DFEBEB;
+}
+
+/* Biometrics */
+
+.biometrics-content {
+    display: flex;
+    width: 962px;
+    flex-direction: row;
+    margin-top: 18px;
+    justify-content: space-between;
+}
+
+.biometrics-item {
+    width: 218px;
+    height: 134px;
+    background: white;
+    border: 1px #DFE0EB solid;
+    border-radius: 8px;
+}
+
+.biometrics-item-label {
+    margin-top: 24px;
+    text-align: center;
+}
+
+.biometrics-item-label label {
+    font-size: 16px;
+    font-family: "Mulish-Bold";
+    color: #A4A6B3;
+}
+
+.biometrics-item-value {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.biometrics-item-value label {
+    font-size: 42px;
+    font-family: "Mulish-Bold";
+    color: #363740;
+}
+
+/* User input content */
+
+.user-input-content {
+    width: 962px;
+    height: 546px;
+    background: white;
+    border: 1px #DFE0EB solid;
+    border-radius: 8px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+}
+
+.left-panel {
+    width: 620px;
+    border-right: 1px #DFE0EB solid;
+}
+
+.left-panel-title-div {
+    width: 100%;
+    margin: 30px;
+    margin-bottom: 0;
+}
+
+.left-panel label {
+    font-family: "Mulish-Bold";
+    font-size: 24px;
+    color: #363740;
+}
+
+.left-panel-image-div {
+    padding-top: 20px;
+    width: 100%;
+    height: 410px;
+}
+
+.left-panel-image-div img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-right: 25px;
+}
+
+.left-panel-heating-display {
+    position: absolute;
+    top: 335px;
+    left: 755px;
+    font-size: 10px;
+    font-family: "Mulish-Bold";
+}
+
+.left-panel-heating-display h3 {
+    margin-top: -10px;
+}
+
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    width: 342px;
+    justify-content: start;
+}
+
+.right-panel-item {
+    height: 109px;
+}
+
+.right-panel-border {
+    border-bottom: 1px #DFE0EB solid;
+}
+
+.user-input-title {
+    margin-top: 16px;
+    text-align: center;
+}
+
+.user-input-title label {
+    font-size: 16px;
+    font-family: "Mulish-SemiBold";
+    color: #A4A6B3;
+}
+
+.user-input-value {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-input-minus {
+    width: 20px;
+    padding-top: 4px;
+}
+
+.user-input-plus {
+    width: 20px;
+    padding-top: 4px;
+}
+
+.user-input-minus img:hover{
+    cursor: pointer;
+}
+
+.user-input-plus img:hover{
+    cursor: pointer;
+}
+
+.user-input-display-value {
+    width: 94px;
+    text-align: center;
+}
+
+.user-input-display-value label {
+    font-size: 32px;
+    font-family: "Mulish-Bold";
+    color: #363740;
+}
+
+.toggle {
+    margin-top: 8px;
+    width: 55px;
+    height: 30px;
+    background: #3E4049;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.2s;
+    transition-timing-function: ease-out;
+}
+
+.toggle.active {
+    background: #5ca700;
+    transition: 0.2s;
+    transition-timing-function: ease-out;
+}
+
+.toggle-button {
+    width: 24px;
+    height: 24px;
+    margin-top: 3px;
+    margin-left: 3px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    transition: 0.2s;
+    transition-timing-function: ease-out;
+}
+
+.toggle.active .toggle-button {
+    margin-left: 28px;
+}
+
+.vertical-toggle {
+    position: absolute;
+    top: 540px;
+    left: 1190px;
+    width: 30px;
+    height: 55px;
+    background: #3E4049;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.2s;
+    transition-timing-function: ease-out;
+}
+
+.vertical-toggle.active {
+    background: #77C50A;
+    transition: 0.2s;
+    transition-timing-function: ease-out;
+}
+
+.vertical-toggle-button {
+    width: 24px;
+    height: 24px;
+    margin-top: 3px;
+    margin-left: 3px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    transition: 0.2s;
+    transition-timing-function: ease-out;
+}
+
+.vertical-toggle.active .vertical-toggle-button {
+    margin-top: 28px;
+}
